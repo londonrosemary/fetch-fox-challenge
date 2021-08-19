@@ -1,16 +1,36 @@
 /*
- DELIVERABLE 1: When a user clicks on the button, display a picture of a fox using the fox API (https://randomfox.ca/floof/)
+DELIVERABLE 1: When a user clicks on the button, display a picture of a fox using the fox API (https://randomfox.ca/floof/)
 This deliverable will require you to combine event handling, communication with the server (fetch), and DOM manipulation
 */
+const bttn = document.querySelector('button')
+bttn.addEventListener('click', e => getRandomImg(e))
 
+
+function getRandomImg(e) {
+const BASE_URL = 'https://randomfox.ca/floof/'
+fetch(BASE_URL)
+.then(resp => resp.json())
+.then(data => {
+    createImg(data)})
+}
+
+function createImg(fox) {
+    const imageContainer = document.querySelector('div.img')
+    const foxImg = document.querySelector("#body > div.part-one > img")
+    foxImg.src = fox.image
+
+    imageContainer.append(foxImg)
+}
 
 
 /*
 DELIVERABLE 2: Start the json-server so that it is able to serve the data from the db.json file (json-server --watch db.json).
- Make a fetch request to "http://localhost:3000/foxes" to get an array of objects with fox data! For each object, create a <li></li>
+Make a fetch request to "http://localhost:3000/foxes" to get an array of objects with fox data! For each object, create a <li></li>
 element that displays the fox's name. The li element should also save the fox's ID. You can append the li element to the ul#list-of-foxes
 element.
 */
+
+
 
 
 
@@ -24,7 +44,7 @@ the div#featured-fox section under the deliverable 2 & 3section.
 
 /*
 DELIVERABLE 4: When a user submits the form, get the user input and add the new fox to the list of foxes in the
- Deliverable 2 & 3section. So this requires creating an <li></li> element that displays the new fox's name and appending it
- to the ul#list-of-foxes element. When you refresh the page, this won't persist, but that's alright for now! You need to learn about
- POST requests in order to make this persist. POST requests will not be on the code challenge. (:
+Deliverable 2 & 3section. So this requires creating an <li></li> element that displays the new fox's name and appending it
+to the ul#list-of-foxes element. When you refresh the page, this won't persist, but that's alright for now! You need to learn about
+POST requests in order to make this persist. POST requests will not be on the code challenge. (:
 */
